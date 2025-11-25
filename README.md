@@ -1,23 +1,74 @@
-# N-Grains
-Introducción
+## ¿Qué es N-Grains?
 
-N-Grains es una herramienta de segmentación con generalización superior al nivel humano, aplicable en 2D y 3D. Funciona incluso en imágenes con ruido, desenfoque (an)isotrópico, submuestreo, inversiones de contraste y diferentes tamaños u órdenes de canales.
+**N-Grains** es una herramienta de segmentación automática para imágenes **2D**, diseñada especialmente para el análisis de **nanopartículas en imágenes TEM**.  
+El sistema utiliza **Cellpose** como núcleo de segmentación, lo que permite trabajar con imágenes complejas manteniendo buenos resultados incluso cuando existen condiciones difíciles, como:
 
-Además de células y núcleos, puede aplicarse a nanopartículas, permitiendo:
+- Ruido en la imagen  
+- Desenfoque (an)isotrópico  
+- Submuestreo  
+- Inversiones de contraste  
+- Diferentes tamaños u órdenes de canales
 
-Detectarlas automáticamente en la imagen.
+---
 
-Extraer sus contornos.
+## ¿Qué hace?
 
-Medir tamaño, ancho, largo, área u otras propiedades morfológicas, facilitando la caracterización cuantitativa de muestras.
+Además de la segmentación, **N-Grains amplía las capacidades de Cellpose**, permitiendo:
 
-Para más información, consulta el artículo o la presentación oficial. Tutoriales y ejemplos de fine-tuning están disponibles en la documentación. Para soporte, abre un issue.
+- Detección automática de cada nanopartícula en la imagen TEM  
+- Generación de máscaras y contornos precisos  
+- Cálculo automático de propiedades morfológicas como:
 
-Instalación
+  - **Ancho**
+  - **Largo**
+  - **Diámetro equivalente**
+  - **Conteo total de partículas**
 
-Puede utilizarse directamente en Google Colab.
+- Visualización de resultados mediante:
+  
+  - **Histogramas**
+
+---
+
+## ¿Para qué sirve?
+
+N-Grains permite caracterizar nanopartículas en microscopía TEM de forma:
+
+- ✔ Rápida  
+- ✔ Automatizada  
+- ✔ Reproducible  
+- ✔ Precisa  
+- ✔ Escalable a grandes volúmenes de datos
+
+Ideal para:
+
+- Análisis de materiales  
+- Caracterización de síntesis de nanopartículas  
+- Evaluación morfológica  
+- Procesamiento de datos de TEM en investigación científica
+
+---
+
+
+
+# Instalación
+
+Para usar **N-Grains**, simplemente:
+
+1. Descarga el notebook disponible en este repositorio (`N-Grains.ipynb`).
+2. Súbelo a **Google Colab**.
+3. Ejecútalo directamente desde la nube.
+
+De esta forma no es necesario instalar librerías ni configurar el entorno en tu computadora.
+Todo funciona desde Colab.
 
 # GUI
+
+El notebook incluye una interfaz gráfica interactiva, diseñada para analizar imágenes TEM de manera visual y sencilla.  
+En esta sección se explica cómo usar la GUI:
+
+----
+
 <img width="380" height="380" alt="image" src="https://github.com/user-attachments/assets/5cc33f32-9215-48be-842b-2de38a38230b" />
 
 
@@ -29,68 +80,105 @@ Puede utilizarse directamente en Google Colab.
 <img width="500" height="1013" alt="image" src="https://github.com/user-attachments/assets/f920075d-3f38-4c61-82d5-a297613531fe" />
 
 
-#Mascaras
+### Mascaras
 
-Parámetros de la segmentación
+## Parámetros de la segmentación
 
-A continuación se describen los controles incluidos en la interfaz y su efecto sobre la detección y delineado de los objetos en la imagen:
+A continuación se detallan los controles principales de la interfaz y su efecto sobre la detección y delineado de los objetos en la imagen.
 
-1. Umbral de detección (cellprob_threshold)
+---
 
-Controla la confianza mínima que debe tener el modelo para decidir que una región pertenece a un objeto (por ejemplo, una célula).
+### 1. Umbral de detección (`cellprob_threshold`)
 
-Valores bajos (0.0 – 0.2):
-El modelo acepta detecciones con baja certeza. Esto genera un mayor número de objetos detectados, pero también puede introducir falsos positivos y ruido.
+Controla la confianza mínima necesaria para que el modelo determine que una región corresponde a un objeto (por ejemplo, nanopartícula o célula).
 
-Valores altos (0.6 – 1.0):
-El modelo solo acepta detecciones con alta probabilidad, lo que reduce el número de objetos detectados, pero aumenta la precisión y la fiabilidad de cada detección.
+- **Valores bajos (0.0 – 0.2):**
+  - Acepta detecciones con baja certeza.
+  - Más objetos detectados.
+  - Mayor probabilidad de falsos positivos y ruido.
 
-Este parámetro actúa como un filtro sobre la decisión final del modelo.
+- **Valores altos (0.6 – 1.0):**
+  - Solo se aceptan detecciones con alta probabilidad.
+  - Menos objetos, pero detecciones más fiables y precisas.
 
-2. Normalización (tile_norm_blocksize)
+Este parámetro actúa como un filtro final sobre la decisión del modelo.
 
-Determina la intensidad de la normalización aplicada a la imagen antes de procesarla.
-La normalización corrige variaciones de iluminación y contraste entre diferentes zonas de la imagen.
+---
 
-Valores bajos (0.0 – 0.2):
-La imagen se utiliza prácticamente sin correcciones. Es útil cuando la iluminación es homogénea y estable.
+### 2. Normalización (`tile_norm_blocksize`)
 
-Valores altos (0.6 – 1.0):
-Se aplica una normalización mucho más marcada, lo que puede mejorar la segmentación en imágenes con cambios de brillo o zonas más oscuras.
-Sin embargo, una normalización excesiva puede alterar el contraste natural de la imagen.
+Controla cuánta normalización de brillo y contraste se aplica antes de procesar la imagen.  
+Es útil para compensar iluminación desigual, muy común en imágenes TEM.
 
-Este parámetro es especialmente útil cuando las imágenes presentan iluminación irregular.
+- **Valores bajos (0.0 – 0.2):**
+  - Se aplica mínima corrección.
+  - Útil cuando la iluminación es homogénea.
 
-3. Sensibilidad de bordes (flow_threshold)
+- **Valores altos (0.6 – 1.0):**
+  - Normalización más fuerte.
+  - Mejora la detección si el brillo está desequilibrado.
+  - Si es demasiado alto, puede distorsionar el contraste original de la imagen.
 
-Controla la fuerza mínima que deben tener los gradientes o bordes para que el modelo los considere válidos al generar los contornos.
+---
 
-Valores bajos (0.0 – 0.3):
-Se aceptan bordes débiles, lo que puede generar contornos más completos y detallados, pero también incrementa la presencia de ruido o bordes poco reales.
+### 3. Sensibilidad de bordes (`flow_threshold`)
 
-Valores altos (0.7 – 1.0):
-Solo se aceptan bordes bien definidos. Esto produce contornos más limpios y definidos, aunque puede llevar a perder detalles finos o bordes sutiles.
+Define qué tan fuertes deben ser los gradientes o bordes para ser considerados válidos al generar los contornos.
 
-Este parámetro permite ajustar el balance entre detalle y limpieza en la detección del borde.
-#aada 
-Sliders de selección de región
+- **Valores bajos (0.0 – 0.3):**
+  - Acepta bordes débiles.
+  - Contornos más completos y detallados.
+  - Puede introducir ruido.
 
-La interfaz incluye cuatro barras que permiten definir una región rectangular dentro de la imagen sobre la cual se realiza el análisis. Los valores están en porcentaje (%), por lo que son independientes del tamaño de la imagen.
+- **Valores altos (0.7 – 1.0):**
+  - Solo se aceptan bordes bien definidos.
+  - Contornos más limpios y definidos.
+  - Puede perder detalles sutiles.
 
-Top (%): fija el límite superior de la región. Valores mayores recortan más desde arriba.
+Este parámetro permite controlar el balance entre detalle y limpieza visual.
 
-Bottom (%): fija el límite inferior. Valores menores recortan desde abajo.
+---
 
-Left (%): fija el borde izquierdo. Valores mayores recortan desde la izquierda.
+## Sliders de selección de región
 
-Right (%): fija el borde derecho. Valores menores recortan desde la derecha.
+La interfaz incluye cuatro controles para definir una región rectangular de análisis dentro de la imagen.  
+Los valores están expresados en **porcentaje (%)**, por lo que funcionan con imágenes de cualquier tamaño.
 
-Internamente, cada porcentaje se convierte a coordenadas en píxeles y se filtran los objetos (regionprops) cuyo bounding box quede totalmente dentro del rectángulo definido. Solo esos objetos se muestran, se miden y se incluyen en el histograma.
+- **Top (%)**  
+  Límite superior.  
+  Valores mayores recortan más desde arriba.
 
-### CITATION
+- **Bottom (%)**  
+  Límite inferior.  
+  Valores menores recortan desde abajo.
 
-**cite the Cellpose-SAM [paper](https://www.biorxiv.org/content/10.1101/2025.04.28.651001v1):**
-Pachitariu, M., Rariden, M., & Stringer, C. (2025). Cellpose-SAM: superhuman generalization for cellular segmentation. <em>bioRxiv</em>.
+- **Left (%)**  
+  Borde izquierdo.  
+  Valores mayores recortan desde la izquierda.
 
-**cite the Cellpose 1.0 [paper](https://t.co/kBMXmPp3Yn?amp=1):**  
-Stringer, C., Wang, T., Michaelos, M., & Pachitariu, M. (2021). Cellpose: a generalist algorithm for cellular segmentation. <em>Nature methods, 18</em>(1), 100-106.
+- **Right (%)**  
+  Borde derecho.  
+  Valores menores recortan desde la derecha.
+
+Internamente, cada porcentaje se convierte a coordenadas en píxeles y se filtran los objetos cuyo `bounding box` esté completamente dentro del rectángulo definido.  
+Solo esos objetos:
+
+- se muestran en la imagen,
+- se miden (diámetro, ancho, largo, área, etc.),
+- y se incluyen en el histograma resultante.
+
+## Citación
+
+Este proyecto utiliza el modelo Cellpose como base para la segmentación automática de nanopartículas en imágenes TEM.  
+
+### Cellpose-SAM
+Pachitariu, M., Rariden, M., & Stringer, C. (2025).  
+*Cellpose-SAM: superhuman generalization for cellular segmentation*. bioRxiv.  
+Disponible en: https://www.biorxiv.org/content/10.1101/2025.04.28.651001v1
+
+### Cellpose 1.0
+Stringer, C., Wang, T., Michaelos, M., & Pachitariu, M. (2021).  
+*Cellpose: a generalist algorithm for cellular segmentation*. Nature Methods, 18(1), 100–106.
+
+> **Importante:** Aunque este repositorio adapta Cellpose para el análisis de nanopartículas (cálculo de diámetro, ancho, largo, conteo de objetos e histogramas en imágenes TEM), el modelo original pertenece a los autores mencionados y debe ser citado cuando se utilice en trabajos académicos, reportes o publicaciones.
+
