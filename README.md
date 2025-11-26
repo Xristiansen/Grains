@@ -146,6 +146,8 @@ Este parámetro permite controlar el balance entre detalle y limpieza visual.
 
 ### Sliders de selección de región
 <img width="500" height="1013" alt="image" src="https://github.com/user-attachments/assets/f920075d-3f38-4c61-82d5-a297613531fe" />
+
+
 La interfaz incluye cuatro controles para definir una región rectangular de análisis dentro de la imagen.  
 Los valores están expresados en **porcentaje (%)**, por lo que funcionan con imágenes de cualquier tamaño.
 
@@ -171,6 +173,11 @@ Solo esos objetos:
 - se muestran en la imagen,
 - se miden (diámetro, ancho, largo, área, etc.),
 - y se incluyen en el histograma resultante.
+
+----
+### Escala
+
+
 
 ## Citación
 
