@@ -81,6 +81,7 @@ En esta sección se explica cómo usar la GUI:
 
 
 ### Mascaras
+<img width="500" height="1013" alt="Captura de pantalla 2025-11-25 203832" src="https://github.com/user-attachments/assets/c71e8ee8-c423-4a2f-806d-1a61c5065235" />
 
 ## Parámetros de la segmentación
 
