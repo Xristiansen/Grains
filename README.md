@@ -71,14 +71,11 @@ En esta sección se explica cómo usar la GUI:
 
 <img width="380" height="380" alt="image" src="https://github.com/user-attachments/assets/5cc33f32-9215-48be-842b-2de38a38230b" />
 
-
-
-
+----
 
 <img width="500" height="949" alt="image" src="https://github.com/user-attachments/assets/9e183b9a-6df2-4c56-99b9-999f186f5f8f" />
 
-<img width="500" height="1013" alt="image" src="https://github.com/user-attachments/assets/f920075d-3f38-4c61-82d5-a297613531fe" />
-
+----
 
 ### Mascaras
 <img width="500" height="1013" alt="Captura de pantalla 2025-11-25 203832" src="https://github.com/user-attachments/assets/c71e8ee8-c423-4a2f-806d-1a61c5065235" />
@@ -140,7 +137,7 @@ Este parámetro permite controlar el balance entre detalle y limpieza visual.
 
 ---
 
-## Sliders de selección de región
+### Sliders de selección de región
 <img width="500" height="1013" alt="image" src="https://github.com/user-attachments/assets/f920075d-3f38-4c61-82d5-a297613531fe" />
 La interfaz incluye cuatro controles para definir una región rectangular de análisis dentro de la imagen.  
 Los valores están expresados en **porcentaje (%)**, por lo que funcionan con imágenes de cualquier tamaño.
