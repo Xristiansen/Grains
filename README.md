@@ -177,8 +177,15 @@ Solo esos objetos:
 ----
 ### Escala
 
+Imagen
+
+Explicación
+
+----
+### Gráfica
 
 
+---
 ## Citación
 
 Este proyecto utiliza el modelo Cellpose como base para la segmentación automática de nanopartículas en imágenes TEM.  
