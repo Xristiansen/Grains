@@ -76,7 +76,7 @@ Este bloque del código se encarga de configurar automáticamente el entorno de 
 - Descarga el archivo del modelo entrenado (`Trained_model.cpn`) desde Google Drive.
 - Carga el modelo personalizado en el **Código**.
 ----
-Esta sección del código permite al usuario **subir una imagen* directamente desde su dispositivo y la prepara para ser procesada por el modelo:
+Esta sección del código permite al usuario **subir una imagen** directamente desde su dispositivo y la prepara para ser procesada por el modelo:
 
 
 
